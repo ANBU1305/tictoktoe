@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            height: 100px;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a"></div>
+    <div id="div1">
+        <table id="table">
+            <tr>
+                <td id="1"></td>
+                <td id="2"></td>
+                <td id="3"></td>
+            </tr>
+            <tr>
+                <td id="4"></td>
+                <td id="5"></td>
+                <td id="6"></td>
+            </tr>
+            <tr>
+                <td id="7"></td>
+                <td id="8"></td>
+                <td id="9"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var first = 1;
+        var xcou = 0;
+        var ocou = 0;
+        var x = [];
+        var y = [];
+        var total = [];
+        var win = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
+        document.getElementById("table").addEventListener("click", function (key) {
+            if (first == 1 && key.target.innerHTML.length == 0) {
+                key.target.innerHTML = "x";
+
+                xcou += 1;
+                x.push(parseInt(key.target.id));
+                if (xcou >= 3) {
+                    check();
+                }
+                console.log(x);
+                first = 0;
+            }
+            else {
+                if (key.target.innerHTML.length == 0) {
+                    key.target.innerHTML = "o";
+                    ocou += 1;
+                    y.push(parseInt(key.target.id));
+
+
+                    if (ocou >= 3) {
+                        check();
+                    }
+                    console.log(y)
+                    first = 1;
+                }
+
+            }
+        })
+        function check() {
+            if (first == 1) {
+                total = x;
+            }
+            else {
+                total = y;
+            }
+
+            for (i = 0; i < win.length; i++) {
+
+                if (total.includes(win[i][0]) && total.includes(win[i][1]) && total.includes(win[i][2])) {
+                    if (total == x) {
+                        console.log(x)
+                        document.getElementById("a").innerHTML = "x wins";
+                    }
+
+                    else {
+                        console.log(y)
+                        document.getElementById("a").innerHTML = "o wins";
+                    }
+                }
+                else {
+                    if (x.length + y.length == 9) {
+                        document.getElementById("a").innerHTML = "draw";
+                    }
+                }
+            }
+        }
+    </script>
+    </div>
+</body>
+
+</html>
